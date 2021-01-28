@@ -1,0 +1,28 @@
+HOW TO RUN
+----------
+Make sure cmake and make are installed, then run:
+
+    ./test.sh
+
+This will also run some predefined tests. To run the test on a specific file, run:
+
+    ./test.sh file
+
+FEATURES
+--------
+- The class 'CompressedByteArray' encapsulates the compressed sequence. It allows
+  constant time random access using the overloaded indexing operator. This design
+  allows the sequence to be accessed like normal arrays.
+- The number of bits needed per symbol is chosen dynamically instead of hardcoded,
+  allowing arbitrary files and also providing better compression for files with few
+  unique symbols.
+
+LIMITATIONS
+-----------
+- The algorithm is not on-the-fly, it needs to scan the whole file first in order
+  to find the lowest number of bits that can represent every symbol.
+- The number of bits per symbol is fixed, not adaptive. A few infrequent symbols
+  can make the compressed file much bigger.
+- Slow speed on large files, because of inefficient bit-by-bit processing.
+- mmap could have been used to avoid loading the whole file in memory.
+- Ad-hoc testing system.
